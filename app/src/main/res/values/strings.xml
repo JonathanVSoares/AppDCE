@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">AppDCE</string>
+    <string name="title_ru_main">RU</string>
+    <string name="title_cardapio">Cardápio</string>
+    <string name="ru_menu">Cardápios</string>
+    <string name="ru_info">Informações do RU</string>
+    <string name="ru_breakfast">Café da Manhã</string>
+    <string name="ru_lunch">Almoço</string>
+    <string name="ru_dinner">Jantar</string>
+    <string name="week_day_name1">Domingo</string>
+    <string name="week_day_name2">Segunda-Feira</string>
+    <string name="week_day_name3">Terça-Feira</string>
+    <string name="week_day_name4">Quarta-Feira</string>
+    <string name="week_day_name5">Quinta-Feira</string>
+    <string name="week_day_name6">Sexta-Feira</string>
+    <string name="week_day_name7">Domingo</string>
+    <string name="create_post">Criar Post</string>
+    <string name="novo_post">Novo Post</string>
+    <string name="title">Título</string>
+    <string name="conteudo">Conteúdo</string>
+    <string name="tags">Tags</string>
+    <string name="referencia_outro_post">Referencia outro post</string>
+    <string name="post_referencia">Post Referência</string>
+    <string name="salvar">Salvar</string>
+    <string name="criar">Criar</string>
+    <string name="post_created">Post Criado</string>
+    <string name="open_post_label">Post</string>
+    <string name="author_image_description">Imagem do autor</string>
+</resources>

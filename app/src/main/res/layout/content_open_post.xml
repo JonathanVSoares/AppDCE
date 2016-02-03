@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/org_image_view"
+            android:contentDescription="@string/author_image_description"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/org_author_view"
+            android:layout_toEndOf="@+id/org_image_view"
+            android:layout_toRightOf="@+id/org_image_view" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/post_subject_view"
+            android:layout_toEndOf="@+id/org_image_view"
+            android:layout_toRightOf="@+id/org_image_view"
+            android:layout_below="@+id/org_author_view" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/post_text_view"
+            android:layout_below="@+id/org_image_view" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/post_date_posted_view"
+            android:layout_below="@+id/post_text_view" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/post_tags_view"
+            android:layout_below="@+id/post_date_posted_view" />
+        
+    </RelativeLayout>
+
+</ScrollView>

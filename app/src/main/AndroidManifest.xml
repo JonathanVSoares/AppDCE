@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ufpr.dce.appdce">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".RUMain"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/title_ru_main">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".RUMenuView"
+            android:label="@string/title_cardapio"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".RUMain">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".RUMain" />
+        </activity>
+
+        <activity
+            android:name=".CreatePostActivity"
+            android:label="@string/create_post"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".RUMain">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".RUMain" />
+        </activity>
+
+        <activity
+            android:name=".OpenPostActivity"
+            android:label="@string/open_post_label"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".CreatePostActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".CreatePostActivity" />
+        </activity>
+
+    </application>
+
+</manifest>
