@@ -23,8 +23,10 @@ public class RUMain extends AppCompatActivity{
         startActivity(intent);
     }
 
-    public void OpenInfo (View view){
+    public void OpenFeed (View view){
+        Intent intent = new Intent(getBaseContext(), FeedActivity.class);
 
+        startActivity(intent);
     }
 
     public void OpenCreatePost (View view){
@@ -32,5 +34,4 @@ public class RUMain extends AppCompatActivity{
 
         startActivity(intent);
     }
-
 }

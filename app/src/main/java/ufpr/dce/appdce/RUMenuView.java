@@ -99,12 +99,11 @@ public class RUMenuView extends AppCompatActivity{
     }
 
     private void createMenuTitlesView(Calendar cal, int todaysDayOfWeek){
-
         DateFormat dateFormat = new SimpleDateFormat("dd/MM");
         int dayOfWeek = cal.get(Calendar.DAY_OF_WEEK);
 
 
-        int dayOfWeekId = getResources().getIdentifier("week_day_name" + dayOfWeek, "string", this.getPackageName());
+        int dayOfWeekId = getResources().getIdentifier("week_day_name" + dayOfWeek, "string", getPackageName());
 
         String dayOfWeekName = getResources().getString(dayOfWeekId);
 

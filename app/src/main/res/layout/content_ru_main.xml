@@ -20,11 +20,11 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:text="@string/ru_info"
+        android:text="@string/open_feed"
         android:textSize="20sp"
         android:background="@color/colorGrey2"
         android:gravity="center"
-        android:onClick="OpenInfo"/>
+        android:onClick="OpenFeed"/>
 
     <TextView
         android:layout_width="match_parent"

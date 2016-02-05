@@ -52,6 +52,16 @@
                 android:value=".CreatePostActivity" />
         </activity>
 
+        <activity
+            android:name=".FeedActivity"
+            android:label="@string/feed_label"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".RUMain">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".RUMain" />
+        </activity>
+
     </application>
 
 </manifest>

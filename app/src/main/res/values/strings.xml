@@ -3,7 +3,7 @@
     <string name="title_ru_main">RU</string>
     <string name="title_cardapio">Cardápio</string>
     <string name="ru_menu">Cardápios</string>
-    <string name="ru_info">Informações do RU</string>
+    <string name="open_feed">Abrir Feed</string>
     <string name="ru_breakfast">Café da Manhã</string>
     <string name="ru_lunch">Almoço</string>
     <string name="ru_dinner">Jantar</string>
@@ -26,4 +26,5 @@
     <string name="post_created">Post Criado</string>
     <string name="open_post_label">Post</string>
     <string name="author_image_description">Imagem do autor</string>
+    <string name="feed_label">Feed</string>
 </resources>

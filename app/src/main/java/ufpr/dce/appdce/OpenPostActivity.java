@@ -46,7 +46,6 @@ public class OpenPostActivity extends AppCompatActivity {
 
                         @Override
                         public void onResponse(JSONObject response) {
-                            Log.d("AppDCE", response.toString());
 
                             try {
                                 if(response.get("success").toString().equals("1")){
@@ -68,7 +67,6 @@ public class OpenPostActivity extends AppCompatActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
-                            Log.d("AppDCE", error.toString());
                         }
                     });
 
