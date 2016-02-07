@@ -12,9 +12,9 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".RUMain"
+            android:name=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:label="@string/title_ru_main">
+            android:label="@string/title_app_main">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,20 +26,20 @@
             android:name=".RUMenuView"
             android:label="@string/title_cardapio"
             android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".RUMain">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".RUMain" />
+                android:value=".MainActivity" />
         </activity>
 
         <activity
             android:name=".CreatePostActivity"
             android:label="@string/create_post"
             android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".RUMain">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".RUMain" />
+                android:value=".MainActivity" />
         </activity>
 
         <activity
@@ -56,10 +56,10 @@
             android:name=".FeedActivity"
             android:label="@string/feed_label"
             android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".RUMain">
+            android:parentActivityName=".MainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".RUMain" />
+                android:value=".MainActivity" />
         </activity>
 
     </application>

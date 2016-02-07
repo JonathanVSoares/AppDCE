@@ -52,7 +52,7 @@ public class OpenPostActivity extends AppCompatActivity {
                                     JSONObject postInfo = response.getJSONObject("post");
 
                                     postSubjectView.setText(postInfo.getString("title"));
-                                    postAuthorView.setText(postInfo.getString("responsible_name"));
+                                    postAuthorView.setText(postInfo.getString("responsible_abbreviation"));
                                     postTextView.setText(postInfo.getString("text"));
                                     postDateView.setText(postInfo.getString("post_date"));
                                     postTagsView.setText("Tags: " + postInfo.getString("tags"));

@@ -11,6 +11,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/org_image_view"
+            android:layout_margin="5dp"
             android:contentDescription="@string/author_image_description"
             android:src="@mipmap/ic_launcher" />
 
@@ -18,35 +19,54 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/org_author_view"
+            android:textSize="22sp"
             android:layout_toEndOf="@+id/org_image_view"
-            android:layout_toRightOf="@+id/org_image_view" />
+            android:layout_toRightOf="@+id/org_image_view"
+            android:text="testing author" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/post_subject_view"
+            android:textSize="18sp"
             android:layout_toEndOf="@+id/org_image_view"
             android:layout_toRightOf="@+id/org_image_view"
-            android:layout_below="@+id/org_author_view" />
+            android:layout_below="@+id/org_author_view"
+            android:text="testing subject" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/post_text_view"
-            android:layout_below="@+id/org_image_view" />
+            android:textSize="15sp"
+            android:padding="5dp"
+            android:layout_below="@+id/org_image_view"
+            android:text="testing text" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/post_date_posted_view"
-            android:layout_below="@+id/post_text_view" />
+            android:textSize="12sp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_alignEnd="@+id/post_text_view"
+            android:layout_alignRight="@+id/post_text_view"
+            android:layout_below="@+id/post_text_view"
+            android:text="testing post date" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/post_tags_view"
-            android:layout_below="@+id/post_date_posted_view" />
-        
+            android:textSize="12sp"
+            android:layout_marginStart="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_alignStart="@+id/post_text_view"
+            android:layout_alignLeft="@+id/post_text_view"
+            android:layout_below="@+id/post_text_view"
+            android:layout_toStartOf="@+id/post_date_posted_view"
+            android:layout_toLeftOf="@+id/post_date_posted_view"
+            android:text="testing tags" />
     </RelativeLayout>
-
 </ScrollView>
