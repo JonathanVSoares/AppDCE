@@ -1,9 +1,9 @@
 package ufpr.dce.appdce;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -123,7 +123,7 @@ public class FeedActivity extends AppCompatActivity{
             RelativeLayout.MarginLayoutParams imageMarginParams = new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
             imageMarginParams.setMargins(5, 5, 5, 5);
-            newPostView.setLayoutParams(imageMarginParams);
+            orgImageView.setLayoutParams(imageMarginParams);
             newPostView.addView(orgImageView);
 
             orgImageView.setId(ViewIdGenerator.generateViewId());
@@ -219,6 +219,11 @@ public class FeedActivity extends AppCompatActivity{
             postTagsView.setLayoutParams(tagsViewParams);
             // **
 
+            LinearLayout.LayoutParams postLayoutParams = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+            postLayoutParams.setMargins(7, 7, 7, 7);
+            newPostView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorGrey2));
+            newPostView.setLayoutParams(postLayoutParams);
 
         }
         catch (JSONException e){
