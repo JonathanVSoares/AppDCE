@@ -9,19 +9,14 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
-
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity{
     private DrawerLayout mDrawerLayout;
@@ -123,11 +118,10 @@ public class MainActivity extends AppCompatActivity{
 
     private void selectItem(int position) {
         Fragment fragment;
-        Bundle args;
         switch (mDrawerOptions[position]){
             case "Feed":
                 // update the main content by replacing fragments
-                fragment = new FeedActivity();
+                fragment = new FeedFragment();
                 break;
             case "Criar Post":
                 // update the main content by replacing fragments
@@ -139,13 +133,12 @@ public class MainActivity extends AppCompatActivity{
                 break;
             default:
                 // update the main content by replacing fragments
-                fragment = new FeedActivity();
+                fragment = new FeedFragment();
                 break;
         }
 
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-
 
         // update selected item and title, then close the drawer
         mDrawerList.setItemChecked(position, true);

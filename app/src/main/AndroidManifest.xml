@@ -53,7 +53,7 @@
         </activity>
 
         <activity
-            android:name=".FeedActivity"
+            android:name=".FeedFragment"
             android:label="@string/feed_label"
             android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".MainActivity">
