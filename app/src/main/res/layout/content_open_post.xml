@@ -22,8 +22,7 @@
             android:id="@+id/org_author_view"
             android:textSize="22sp"
             android:layout_toEndOf="@+id/org_image_view"
-            android:layout_toRightOf="@+id/org_image_view"
-            android:text="testing author" />
+            android:layout_toRightOf="@+id/org_image_view" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -32,8 +31,7 @@
             android:textSize="18sp"
             android:layout_toEndOf="@+id/org_image_view"
             android:layout_toRightOf="@+id/org_image_view"
-            android:layout_below="@+id/org_author_view"
-            android:text="testing subject" />
+            android:layout_below="@+id/org_author_view" />
 
         <TextView
             android:layout_width="match_parent"
@@ -41,8 +39,7 @@
             android:id="@+id/post_text_view"
             android:textSize="15sp"
             android:padding="5dp"
-            android:layout_below="@+id/org_image_view"
-            android:text="testing text" />
+            android:layout_below="@+id/org_image_view" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -53,8 +50,7 @@
             android:layout_marginRight="5dp"
             android:layout_alignEnd="@+id/post_text_view"
             android:layout_alignRight="@+id/post_text_view"
-            android:layout_below="@+id/post_text_view"
-            android:text="testing post date" />
+            android:layout_below="@+id/post_text_view" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -67,7 +63,6 @@
             android:layout_alignLeft="@+id/post_text_view"
             android:layout_below="@+id/post_text_view"
             android:layout_toStartOf="@+id/post_date_posted_view"
-            android:layout_toLeftOf="@+id/post_date_posted_view"
-            android:text="testing tags" />
+            android:layout_toLeftOf="@+id/post_date_posted_view" />
     </RelativeLayout>
 </ScrollView>

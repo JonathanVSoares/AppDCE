@@ -1,12 +1,12 @@
 package ufpr.dce.appdce;
 
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -28,24 +28,23 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
-public class FeedActivity extends AppCompatActivity{
+public class FeedActivity extends Fragment {
     HashMap<String, String> postsIdsMap = new HashMap<>();
     int postCounter;
 
     @Override
-    public void onCreate (Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_feed);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.content_feed, container, false);
 
-        Toolbar toolbar = (Toolbar) findViewById (R.id.toolbar);
-        setSupportActionBar(toolbar);
+        getActivity().setTitle("Feed");
 
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss");
         Date now = new Date();
         String strDate = sdfDate.format(now);
 
 
-        RequestQueue queue = Volley.newRequestQueue(getBaseContext());
+        RequestQueue queue = Volley.newRequestQueue(getActivity());
 
         String url = "http://192.168.0.15/AppDce/get_posts.php?from_date=" + strDate + "&number_of_posts=10";
 
@@ -60,7 +59,8 @@ public class FeedActivity extends AppCompatActivity{
                             if(response.get("success").toString().equals("1")){
                                 JSONArray postsInfo = response.getJSONArray("posts");
 
-                                LinearLayout feedView = (LinearLayout) findViewById(R.id.feed_layout_view);
+                                assert getView() != null;
+                                LinearLayout feedView = (LinearLayout) getView().findViewById(R.id.feed_layout_view);
 
                                 for (postCounter = 0; postCounter < postsInfo.length(); postCounter++){
                                     JSONObject postInfo = postsInfo.getJSONObject(postCounter);
@@ -76,17 +76,25 @@ public class FeedActivity extends AppCompatActivity{
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_SHORT).show();
                         Log.d("AppDCE", error.toString());
                     }
                 });
 
         queue.add(jsObjRequest);
+
+        return rootView;
+    }
+
+    @Override
+    public void onCreate (Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
     }
 
     private void createPostView(ViewGroup view, JSONObject object){
         try {
-            RelativeLayout newPostView = new RelativeLayout(this);
+            RelativeLayout newPostView = new RelativeLayout(getActivity());
 
             view.addView(newPostView);
 
@@ -109,7 +117,7 @@ public class FeedActivity extends AppCompatActivity{
 
                     String postId = postsIdsMap.get(String.valueOf(viewId));
 
-                    Intent intent = new Intent(getBaseContext(), OpenPostActivity.class);
+                    Intent intent = new Intent(getActivity(), OpenPostActivity.class);
 
                     intent.putExtra(OpenPostActivity.EXTRA_POST_ID, postId);
 
@@ -118,7 +126,7 @@ public class FeedActivity extends AppCompatActivity{
             });
 
             // Create Image Layout
-            ImageView orgImageView = new ImageView(this);
+            ImageView orgImageView = new ImageView(getActivity());
             orgImageView.setImageResource(R.mipmap.ic_launcher);
             RelativeLayout.MarginLayoutParams imageMarginParams = new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.WRAP_CONTENT,RelativeLayout.LayoutParams.WRAP_CONTENT);
@@ -130,11 +138,11 @@ public class FeedActivity extends AppCompatActivity{
 
 
             // Creating posts' text views
-            TextView orgAuthorView = new TextView(this);
-            TextView postSubjectView = new TextView(this);
-            TextView postTextView = new TextView(this);
-            TextView postDatePostedView = new TextView(this);
-            TextView postTagsView = new TextView(this);
+            TextView orgAuthorView = new TextView(getActivity());
+            TextView postSubjectView = new TextView(getActivity());
+            TextView postTextView = new TextView(getActivity());
+            TextView postDatePostedView = new TextView(getActivity());
+            TextView postTagsView = new TextView(getActivity());
 
             // Setting Ids to use with relative rules
             orgAuthorView.setId(ViewIdGenerator.generateViewId());
@@ -222,7 +230,7 @@ public class FeedActivity extends AppCompatActivity{
             LinearLayout.LayoutParams postLayoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
             postLayoutParams.setMargins(7, 7, 7, 7);
-            newPostView.setBackgroundColor(ContextCompat.getColor(this, R.color.colorGrey2));
+            newPostView.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.colorGrey2));
             newPostView.setLayoutParams(postLayoutParams);
 
         }

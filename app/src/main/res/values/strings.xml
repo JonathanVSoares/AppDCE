@@ -1,4 +1,13 @@
 <resources>
+    <string-array name="appMainPages">
+        <item>Feed</item>
+        <item>Criar Post</item>
+        <item>Cardápio RU</item>
+    </string-array>
+    <string name="action_websearch">Web search</string>
+    <string name="app_not_available">Sorry, there\'s no web browser available</string>
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
     <string name="app_name">AppDCE</string>
     <string name="title_app_main">App DCE</string>
     <string name="title_cardapio">Cardápio</string>
@@ -13,7 +22,7 @@
     <string name="week_day_name4">Quarta-Feira</string>
     <string name="week_day_name5">Quinta-Feira</string>
     <string name="week_day_name6">Sexta-Feira</string>
-    <string name="week_day_name7">Domingo</string>
+    <string name="week_day_name7">Sábado</string>
     <string name="create_post">Criar Post</string>
     <string name="novo_post">Novo Post</string>
     <string name="title">Título</string>
