@@ -35,7 +35,7 @@ public class CreatePostActivity extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.content_criar_post, container, false);
+        View rootView = inflater.inflate(R.layout.content_create_post, container, false);
 
         getActivity().setTitle("Novo Post");
 
@@ -86,9 +86,8 @@ public class CreatePostActivity extends Fragment{
                                     Toast.makeText(getActivity(), response.get("message").toString(), Toast.LENGTH_SHORT).show();
 
                                     if(response.get("success").toString().equals("1")){
-                                        Intent intent = new Intent(getActivity(), OpenPostActivity.class);
 
-                                        intent.putExtra(OpenPostActivity.EXTRA_POST_ID, response.get("postid").toString());
+                                        Intent intent = OpenPostActivity.newOpenPostActivity(getActivity(), response.get("postid").toString());
 
                                         startActivity(intent);
                                     }

@@ -1,8 +1,10 @@
 package ufpr.dce.appdce;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.support.v7.widget.Toolbar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,11 +25,19 @@ public class OpenPostActivity extends AppCompatActivity {
     private TextView postTagsView;
 
     @Override
-    public void onCreate(Bundle savedInstanceState){
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_open_post);
 
+        Toolbar toolbar = (Toolbar) findViewById (R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        assert getSupportActionBar() != null;
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+
         Bundle extras = getIntent().getExtras();
+
         if (extras != null) {
             postSubjectView = (TextView) findViewById(R.id.post_subject_view);
             postAuthorView = (TextView) findViewById(R.id.org_author_view);
@@ -66,12 +76,20 @@ public class OpenPostActivity extends AppCompatActivity {
 
                         @Override
                         public void onErrorResponse(VolleyError error) {
-                            Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_SHORT).show();
                         }
                     });
 
             queue.add(jsObjRequest);
         }
+    }
 
+    public static Intent newOpenPostActivity(Context context, String postId){
+        Intent intent = new Intent(context, OpenPostActivity.class);
+        Bundle b = new Bundle();
+        b.putString(EXTRA_POST_ID, postId);
+        intent.putExtras(b);
+
+        return intent;
     }
 }

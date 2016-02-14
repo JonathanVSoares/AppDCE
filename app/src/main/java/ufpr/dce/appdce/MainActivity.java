@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity{
         getSupportActionBar().setHomeButtonEnabled(true);
 
         mTitle = mDrawerTitle = getTitle();
-        mDrawerOptions = getResources().getStringArray(R.array.appMainPages);
+        mDrawerOptions = getResources().getStringArray(R.array.app_main_pages);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer_list);
         mDrawer = (LinearLayout) findViewById(R.id.left_drawer);

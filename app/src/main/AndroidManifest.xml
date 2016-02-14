@@ -23,38 +23,8 @@
         </activity>
 
         <activity
-            android:name=".RUMenuView"
-            android:label="@string/title_cardapio"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-
-        <activity
-            android:name=".CreatePostActivity"
-            android:label="@string/create_post"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-
-        <activity
             android:name=".OpenPostActivity"
             android:label="@string/open_post_label"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".CreatePostActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".CreatePostActivity" />
-        </activity>
-
-        <activity
-            android:name=".FeedFragment"
-            android:label="@string/feed_label"
             android:theme="@style/AppTheme.NoActionBar"
             android:parentActivityName=".MainActivity">
             <meta-data

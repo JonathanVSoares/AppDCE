@@ -41,6 +41,7 @@ public class FeedFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         View rootView = inflater.inflate(R.layout.content_feed, container, false);
 
         getActivity().setTitle("Feed");
@@ -165,7 +166,7 @@ public class FeedFragment extends Fragment {
             if (convertView == null) {
 
                 LayoutInflater vi = LayoutInflater.from(getContext());
-                convertView = vi.inflate(R.layout.post_view, null);
+                convertView = vi.inflate(R.layout.post_view, parent, false);
 
                 holder = new ViewHolder();
                 holder.author = (TextView) convertView.findViewById(R.id.org_author_view);
@@ -197,11 +198,7 @@ public class FeedFragment extends Fragment {
                 public void onClick(View view) {
                     int viewId = view.getId();
 
-                    String postId = postsIdsMap.get(String.valueOf(viewId));
-
-                    Intent intent = new Intent(getActivity(), OpenPostActivity.class);
-
-                    intent.putExtra(OpenPostActivity.EXTRA_POST_ID, postId);
+                    Intent intent = OpenPostActivity.newOpenPostActivity(getActivity(), postsIdsMap.get(String.valueOf(viewId)));
 
                     startActivity(intent);
                 }

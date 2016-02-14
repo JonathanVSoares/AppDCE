@@ -1,13 +1,12 @@
 <resources>
-    <string-array name="appMainPages">
+    <string-array name="app_main_pages">
         <item>Feed</item>
         <item>Criar Post</item>
         <item>Cardápio RU</item>
     </string-array>
-    <string name="action_websearch">Web search</string>
-    <string name="app_not_available">Sorry, there\'s no web browser available</string>
-    <string name="drawer_open">Open navigation drawer</string>
-    <string name="drawer_close">Close navigation drawer</string>
+    <string name="action_websearch">Web Search</string>
+    <string name="drawer_open">Abre navigation drawer</string>
+    <string name="drawer_close">Fecha navigation drawer</string>
     <string name="app_name">AppDCE</string>
     <string name="title_app_main">App DCE</string>
     <string name="title_cardapio">Cardápio</string>
