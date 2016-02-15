@@ -7,7 +7,7 @@
     android:id="@+id/vScroll"
     android:background="@color/colorBlackGrey"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_menu">
+    tools:context=".MainActivity">
 
     <HorizontalScrollView
         android:id="@+id/hScroll"

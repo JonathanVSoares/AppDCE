@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity{
                 break;
             case "Criar Post":
                 // update the main content by replacing fragments
-                fragment = new CreatePostActivity();
+                fragment = new CreatePostFragment();
                 break;
             case "Cardápio RU":
                 // update the main content by replacing fragments

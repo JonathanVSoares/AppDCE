@@ -34,14 +34,13 @@ import java.util.Locale;
 public class FeedFragment extends Fragment {
     private HashMap<String, String> postsIdsMap = new HashMap<>();
     private ArrayList<Post> postList;
-    private MyCustomAdapter dataAdapter;
+    private PostViewAdapter dataAdapter;
     private Date nextDateToRequest = null;
     private boolean loadingMore = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         View rootView = inflater.inflate(R.layout.content_feed, container, false);
 
         getActivity().setTitle("Feed");
@@ -49,7 +48,7 @@ public class FeedFragment extends Fragment {
         ListView listView = (ListView) rootView.findViewById(R.id.feed_list_view);
 
         postList = new ArrayList<>();
-        dataAdapter = new MyCustomAdapter(getActivity(), R.layout.post_view, postList);
+        dataAdapter = new PostViewAdapter(getActivity(), R.layout.post_view, postList);
         listView.setAdapter(dataAdapter);
 
         Date dateNow = new Date();
@@ -137,11 +136,11 @@ public class FeedFragment extends Fragment {
         loadingMore = true;
     }
 
-    private class MyCustomAdapter extends ArrayAdapter<Post> {
+    private class PostViewAdapter extends ArrayAdapter<Post> {
 
         private ArrayList<Post> postList;
 
-        public MyCustomAdapter(Context context, int textViewResourceId,
+        public PostViewAdapter(Context context, int textViewResourceId,
                                ArrayList<Post> postList) {
             super(context, textViewResourceId, postList);
             this.postList = new ArrayList<>();

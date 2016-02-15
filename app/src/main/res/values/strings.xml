@@ -2,6 +2,7 @@
     <string-array name="app_main_pages">
         <item>Feed</item>
         <item>Criar Post</item>
+        <item>Calendário</item>
         <item>Cardápio RU</item>
     </string-array>
     <string name="action_websearch">Web Search</string>
@@ -35,4 +36,6 @@
     <string name="open_post_label">Post</string>
     <string name="author_image_description">Imagem do autor</string>
     <string name="feed_label">Feed</string>
+    <string name="mandatory_field_missing">Campo Obrigatório em Branco</string>
+    <string name="tags_string">Tags:</string>
 </resources>
