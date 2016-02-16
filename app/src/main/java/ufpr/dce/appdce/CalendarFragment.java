@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
 
+import com.jess.ui.TwoWayGridView;
+
 public class CalendarFragment extends Fragment{
 
     @Override
@@ -14,9 +16,9 @@ public class CalendarFragment extends Fragment{
                              Bundle savedInstanceState){
         View rootView = inflater.inflate(R.layout.content_calendar, container, false);
 
-
-
         GridView calendarView = (GridView) rootView.findViewById(R.id.calendar_view);
+
+        TwoWayGridView a;
 
         return rootView;
     }

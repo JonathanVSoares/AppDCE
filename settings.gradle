@@ -1,2 +1,2 @@
-include ':app'
-include ':twowaygridview'
+include ':app', ':'
+include ':lib'
