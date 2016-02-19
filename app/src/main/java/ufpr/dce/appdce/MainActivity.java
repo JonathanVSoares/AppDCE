@@ -9,6 +9,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -120,19 +121,18 @@ public class MainActivity extends AppCompatActivity{
         Fragment fragment;
         switch (mDrawerOptions[position]){
             case "Feed":
-                // update the main content by replacing fragments
                 fragment = new FeedFragment();
                 break;
             case "Criar Post":
-                // update the main content by replacing fragments
                 fragment = new CreatePostFragment();
                 break;
+            case "Calendário":
+                fragment = new CalendarFragment();
+                break;
             case "Cardápio RU":
-                // update the main content by replacing fragments
                 fragment = new RUMenuView();
                 break;
             default:
-                // update the main content by replacing fragments
                 fragment = new FeedFragment();
                 break;
         }
