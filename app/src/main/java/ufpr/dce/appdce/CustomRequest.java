@@ -1,11 +1,13 @@
 package ufpr.dce.appdce;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
 import com.android.volley.ParseError;
 import com.android.volley.Request;
@@ -36,7 +38,7 @@ public class CustomRequest extends Request<JSONObject>{
     @Override
     protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
         return params;
-    };
+    }
 
     @Override
     protected void deliverResponse(JSONObject response) {
@@ -56,5 +58,4 @@ public class CustomRequest extends Request<JSONObject>{
             return Response.error(new ParseError(je));
         }
     }
-
 }

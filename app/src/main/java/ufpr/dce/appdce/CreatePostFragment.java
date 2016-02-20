@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,7 +30,6 @@ public class CreatePostFragment extends Fragment{
     private ProgressDialog pDialog;
 
     private EditText inputTitle;
-    private CheckBox cBoxReference;
     private EditText inputText;
     private EditText inputTags;
 
@@ -39,6 +39,8 @@ public class CreatePostFragment extends Fragment{
         View rootView = inflater.inflate(R.layout.content_create_post, container, false);
 
         getActivity().setTitle("Novo Post");
+
+        CheckBox cBoxReference;
 
         // Edit Text & Checkbox
         inputTitle = (EditText) rootView.findViewById(R.id.inputTitle);
@@ -65,7 +67,8 @@ public class CreatePostFragment extends Fragment{
                         !inputText.getText().toString().equals("")){
                     createPost();
                 }else{
-                    Toast.makeText(getActivity(), R.string.mandatory_field_missing, Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getActivity(),
+                            R.string.mandatory_field_missing, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -92,9 +95,14 @@ public class CreatePostFragment extends Fragment{
 
         map.put("title",inputTitle.getText().toString());
         map.put("text",inputText.getText().toString());
-        map.put("tags", inputTags.getText().toString());
+        if (!inputTags.getText().toString().equals(""))
+            map.put("tags", inputTags.getText().toString());
         map.put("userid", "1");
         map.put("orgid", "1");
+
+        Log.d("title", inputTitle.getText().toString());
+        Log.d("text", inputText.getText().toString());
+        Log.d("tags", inputTags.getText().toString());
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
@@ -115,11 +123,13 @@ public class CreatePostFragment extends Fragment{
                         pDialog.dismiss();
 
                         try {
-                            Toast.makeText(getActivity(), response.get("message").toString(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getActivity(), response.get("message").toString(),
+                                    Toast.LENGTH_SHORT).show();
 
                             if(response.get("success").toString().equals("1")){
 
-                                Intent intent = OpenPostActivity.newOpenPostActivity(getActivity(), response.get("postid").toString());
+                                Intent intent = OpenPostActivity.newOpenPostActivity(getActivity(),
+                                        response.get("postid").toString());
 
                                 startActivity(intent);
                             }

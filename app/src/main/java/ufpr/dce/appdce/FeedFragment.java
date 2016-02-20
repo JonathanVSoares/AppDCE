@@ -74,12 +74,14 @@ public class FeedFragment extends Fragment {
     }
 
     public void requestPosts(int numberOfPosts, Date dateToRequest){
-        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss", Locale.getDefault());
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd%20HH:mm:ss",
+                Locale.getDefault());
         String strDate = sdfDate.format(dateToRequest);
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
-        String url = "http://192.168.0.15/AppDce/get_posts.php?from_date=" + strDate + "&number_of_posts=" + numberOfPosts;
+        String url = "http://192.168.0.15/AppDce/get_posts.php?from_date=" +
+                strDate + "&number_of_posts=" + numberOfPosts;
 
         CustomRequest jsObjRequest = new CustomRequest
                 (url, null, new Response.Listener<JSONObject>() {
@@ -93,7 +95,8 @@ public class FeedFragment extends Fragment {
                                 assert getView() != null;
 
 
-                                for (int postCounter = 0; postCounter < postsInfo.length(); postCounter++){
+                                for (int postCounter = 0;
+                                     postCounter < postsInfo.length(); postCounter++){
                                     JSONObject postInfo = postsInfo.getJSONObject(postCounter);
                                     Post post = new Post(postInfo);
                                     postList.add(post);

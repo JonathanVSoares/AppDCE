@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -56,7 +57,8 @@ public class OpenPostActivity extends AppCompatActivity {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getBaseContext(),
+                                error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -74,7 +76,8 @@ public class OpenPostActivity extends AppCompatActivity {
             if(response.get("success").toString().equals("1")){
                 JSONObject postInfo = response.getJSONObject("post");
 
-                String tagsText = R.string.tags_string + postInfo.getString("tags");
+                String tagsText = getResources().getString(R.string.tags_string) +
+                        postInfo.getString("tags");
 
                 postSubjectView.setText(postInfo.getString("title"));
                 postAuthorView.setText(postInfo.getString("responsible_abbreviation"));
