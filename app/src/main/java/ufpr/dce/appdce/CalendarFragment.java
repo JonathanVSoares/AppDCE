@@ -4,19 +4,16 @@ import android.app.Fragment;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.jess.ui.TwoWayGridView;
-
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Vector;
 
 public class CalendarFragment extends Fragment{
     public static final String DAY_SELECTED = "DAY_SELECTED";
@@ -29,10 +26,11 @@ public class CalendarFragment extends Fragment{
 
         Calendar cal = Calendar.getInstance();
 
-        int currentDay = cal.get(Calendar.DAY_OF_MONTH);
+        String currentDay = String.valueOf(cal.get(Calendar.MONTH)) +
+                "/" + String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
         int currentMonth = cal.get(Calendar.MONTH);
 
-        // the get() in the middle computes the whole calendar to the first day of the month
+        // the get() in the middle computes the whole calendar to the first day of the month.
         // without it, the day would then be set to be the first day of the CURRENT week
         cal.set(Calendar.DAY_OF_MONTH, 1);
         cal.get(Calendar.DATE);
@@ -42,20 +40,27 @@ public class CalendarFragment extends Fragment{
         ArrayList<String> calendarDays = new ArrayList<>();
         while (cal.get(Calendar.DAY_OF_WEEK) != 1 ||
                 cal.get(Calendar.MONTH) <= currentMonth){
-            Log.d("days", String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
-            calendarDays.add(String.valueOf(cal.get(Calendar.DAY_OF_MONTH)));
+            String dayWMonth = String.valueOf(cal.get(Calendar.MONTH)) +
+                    "/" + String.valueOf(cal.get(Calendar.DAY_OF_MONTH));
+            calendarDays.add(dayWMonth);
+
             cal.add(Calendar.DATE, 1);
         }
 
+        CustomAdapter calendarAdapter;
+
         Bundle args = getArguments();
-        int  daySelected = currentDay;
         if (args != null){
+            int  daySelected;
             daySelected = args.getInt(DAY_SELECTED);
+            calendarAdapter = new CustomAdapter(getActivity(),
+                    calendarDays, currentDay, daySelected);
+        }else{
+            calendarAdapter = new CustomAdapter(getActivity(),
+                    calendarDays, currentDay);
         }
 
-        CustomAdapter calendarAdapter = new CustomAdapter(getActivity(), calendarDays, currentDay, daySelected);
-
-        TwoWayGridView calendarView = (TwoWayGridView) rootView.findViewById(R.id.calendar_view);
+        GridView calendarView = (GridView) rootView.findViewById(R.id.calendar_view);
         calendarView.setAdapter(calendarAdapter);
 
         return rootView;
@@ -63,17 +68,29 @@ public class CalendarFragment extends Fragment{
 
     public class CustomAdapter extends BaseAdapter{
         Context context;
-        Vector<String> viewsIds = new Vector<>();
         ArrayList<String> calendarDays;
-        int currentDay;
-        int daySelected;
-        boolean currentMonth = false;
+        String currentDay;
+        String currentMonth;
+        int daySelected = 0;
 
-        public CustomAdapter(Context context, ArrayList<String> calendarDays, int currentDay, int daySelected){
+
+        public CustomAdapter(Context context, ArrayList<String> calendarDays, String currentDay){
             this.context = context;
             this.calendarDays = calendarDays;
-            this.currentDay = currentDay;
+
+            String[] dayMonth = currentDay.split("/");
+            this.currentMonth = dayMonth[0];
+            this.currentDay = dayMonth[1];
+        }
+
+        public CustomAdapter(Context context, ArrayList<String> calendarDays, String currentDay, int daySelected){
+            this.context = context;
+            this.calendarDays = calendarDays;
             this.daySelected = daySelected;
+
+            String[] dayMonth = currentDay.split("/");
+            this.currentMonth = dayMonth[1];
+            this.currentDay = dayMonth[0];
         }
 
         public int getCount() {
@@ -85,7 +102,7 @@ public class CalendarFragment extends Fragment{
         }
 
         public long getItemId(int position) {
-            return Integer.parseInt(viewsIds.get(position));
+            return 0;
         }
 
         public View getView(int position,
@@ -93,31 +110,35 @@ public class CalendarFragment extends Fragment{
             LinearLayout dayLayout = (LinearLayout) convertView;
 
             if (dayLayout == null) {
-
-                int day = Integer.parseInt(calendarDays.get(position));
-
-                if (day == 1) {
-                    currentMonth = !currentMonth;
-                }
-
-
                 TextView dateDay = new TextView(getActivity());
-                dateDay.setText(String.valueOf(day));
 
                 dayLayout = new LinearLayout(context);
-                LinearLayout.LayoutParams dayLayoutParams = new LinearLayout.LayoutParams(
-                        LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                //dayLayout.setLayoutParams(dayLayoutParams);
-                if (currentMonth) {
+                dayLayout.addView(dateDay);
+
+                GridView.LayoutParams dayLayoutParams = new GridView.LayoutParams(300, 300);
+                dayLayout.setLayoutParams(dayLayoutParams);
+
+                dayLayout.setId(ViewIdGenerator.generateViewId());
+            }
+
+            String dayMonth[] = calendarDays.get(position).split("/");
+
+            String day = dayMonth[1];
+
+            View childView = dayLayout.getChildAt(0);
+            if (childView instanceof TextView){
+                ((TextView) childView).setText(String.valueOf(day));
+            }
+
+            String month = dayMonth[0];
+            if (month.equals(currentMonth)) {
+                if (day.equals(String.valueOf(daySelected))){
+                    dayLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey3));
+                }else {
                     dayLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey2));
                 }
-
-                dayLayout.addView(dateDay);
-                dayLayout.setId(ViewIdGenerator.generateViewId());
-                Log.d("Appdce", String.valueOf(dayLayout.getId()));
-                viewsIds.add(position, String.valueOf(dayLayout.getId()));
             }else{
-                Log.d("testing", String.valueOf(position));
+                dayLayout.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey1));
             }
 
             return dayLayout;

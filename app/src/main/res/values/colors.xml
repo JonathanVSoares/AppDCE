@@ -3,12 +3,12 @@
     <color name="colorPrimary">#634042</color>
     <color name="colorPrimaryDark">#543638</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="colorGrey1">#DDDDDD</color>
-    <color name="colorGrey2">#CCCCCC</color>
-    <color name="colorGreyDark">#999999</color>
+    <color name="colorGrey1">#DDD</color>
+    <color name="colorGrey2">#CCC</color>
+    <color name="colorGrey3">#777</color>
+    <color name="colorGreyDark">#999</color>
     <color name="colorCoral">#DC143C</color>
     <color name="colorMediumPurple">#9370DB</color>
     <color name="colorDarkOrchid">#9932CC</color>
     <color name="colorBlackGrey">#444</color>
-    <color name="colorGrey3">#777</color>
 </resources>
