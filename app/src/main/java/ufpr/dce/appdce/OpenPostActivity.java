@@ -76,14 +76,15 @@ public class OpenPostActivity extends AppCompatActivity {
             if(response.get("success").toString().equals("1")){
                 JSONObject postInfo = response.getJSONObject("post");
 
-                String tagsText = getResources().getString(R.string.tags_string) +
-                        postInfo.getString("tags");
+                //String tagsText = getResources().getString();
 
                 postSubjectView.setText(postInfo.getString("title"));
                 postAuthorView.setText(postInfo.getString("responsible_abbreviation"));
                 postTextView.setText(postInfo.getString("text"));
                 postDateView.setText(postInfo.getString("post_date"));
-                postTagsView.setText(tagsText);
+                postTagsView.setText(new StringBuilder().
+                        append(getResources().getString(R.string.tags_string)).
+                        append(postInfo.getString("tags")));
             }
         }
         catch (JSONException e){

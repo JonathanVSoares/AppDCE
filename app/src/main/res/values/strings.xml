@@ -29,6 +29,11 @@
     <string name="conteudo">Conteúdo</string>
     <string name="tags">Tags</string>
     <string name="referencia_outro_post">Referencia outro post</string>
+    <string name="event_box">É um evento</string>
+    <string name="event_date_beg_hint">Data do início do evento</string>
+    <string name="event_time_beg_hint">Horário do início do evento</string>
+    <string name="event_date_end_hint">Data do final do evento</string>
+    <string name="event_time_end_hint">Horário do final do evento</string>
     <string name="post_referencia">Post Referência</string>
     <string name="salvar">Salvar</string>
     <string name="criar">Criar</string>

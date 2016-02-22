@@ -21,12 +21,67 @@
         <CheckBox
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:text="@string/event_box"
+            android:id="@+id/event_box"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/event_date_beg_hint"
+                android:id="@+id/inputEventDateBeg"
+                android:visibility="gone"
+                android:layout_weight="2"
+                style="@style/Platform.Widget.AppCompat.Spinner"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/event_time_beg_hint"
+                android:id="@+id/inputEventTimeBeg"
+                android:visibility="gone"
+                android:layout_weight="1"
+                style="@style/Platform.Widget.AppCompat.Spinner"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/event_date_end_hint"
+                android:id="@+id/inputEventDateEnd"
+                android:visibility="gone"
+                android:layout_weight="2"
+                style="@style/Platform.Widget.AppCompat.Spinner"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="@string/event_time_end_hint"
+                android:id="@+id/inputEventTimeEnd"
+                android:visibility="gone"
+                android:layout_weight="1"
+                style="@style/Platform.Widget.AppCompat.Spinner"/>
+        </LinearLayout>
+
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="@string/referencia_outro_post"
             android:id="@+id/reference_post_box"
             />
 
         <AutoCompleteTextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/post_referencia"
             android:id="@+id/post_referencia"

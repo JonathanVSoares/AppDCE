@@ -1,16 +1,24 @@
 package ufpr.dce.appdce;
 
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.format.DateFormat;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -22,7 +30,12 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class CreatePostFragment extends Fragment{
@@ -30,8 +43,13 @@ public class CreatePostFragment extends Fragment{
     private ProgressDialog pDialog;
 
     private EditText inputTitle;
+    private TextView eventDateBeg;
+    private TextView eventDateEnd;
+    private TextView eventTimeBeg;
+    private TextView eventTimeEnd;
     private EditText inputText;
     private EditText inputTags;
+    private CheckBox cBoxEvent;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,27 +58,68 @@ public class CreatePostFragment extends Fragment{
 
         getActivity().setTitle("Novo Post");
 
-        CheckBox cBoxReference;
-
-        // Edit Text & Checkbox
         inputTitle = (EditText) rootView.findViewById(R.id.inputTitle);
-        cBoxReference = (CheckBox) rootView.findViewById(R.id.reference_post_box);
+        eventDateBeg = (TextView) rootView.findViewById(R.id.inputEventDateBeg);
+        eventDateEnd = (TextView) rootView.findViewById(R.id.inputEventDateEnd);
+        eventTimeBeg = (TextView) rootView.findViewById(R.id.inputEventTimeBeg);
+        eventTimeEnd = (TextView) rootView.findViewById(R.id.inputEventTimeEnd);
+        CheckBox cBoxReference = (CheckBox) rootView.findViewById(R.id.reference_post_box);
+        cBoxEvent = (CheckBox) rootView.findViewById(R.id.event_box);
         inputText = (EditText) rootView.findViewById(R.id.inputText);
         inputTags = (EditText) rootView.findViewById(R.id.inputTags);
+        Button btnCreateProduct = (Button) rootView.findViewById(R.id.btnCreatePost);
 
         cBoxReference.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                referenceToAPost(v);
+                showReferencInput(v);
             }
         });
 
-        // Create button
-        Button btnCreateProduct = (Button) rootView.findViewById(R.id.btnCreatePost);
+        cBoxEvent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showEventInputs(v);
+            }
+        });
 
-        // button click event
+        eventDateBeg.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                DatePickerFragment newFragment = new DatePickerFragment();
+                newFragment.setPickerOwner(eventDateBeg);
+                newFragment.show(getFragmentManager(), "datePicker");
+            }
+        });
+
+        eventDateEnd.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                DatePickerFragment newFragment = new DatePickerFragment();
+                newFragment.setPickerOwner(eventDateEnd);
+                newFragment.show(getFragmentManager(), "datePicker");
+            }
+        });
+
+        eventTimeBeg.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                TimePickerFragment newFragment = new TimePickerFragment();
+                newFragment.setPickerOwner(eventTimeBeg);
+                newFragment.show(getFragmentManager(), "timePicker");
+            }
+        });
+
+        eventTimeEnd.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                TimePickerFragment newFragment = new TimePickerFragment();
+                newFragment.setPickerOwner(eventTimeEnd);
+                newFragment.show(getFragmentManager(), "timePicker");
+            }
+        });
+
         btnCreateProduct.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
                 if (!inputTitle.getText().toString().equals("") &&
@@ -76,7 +135,7 @@ public class CreatePostFragment extends Fragment{
         return rootView;
     }
 
-    private void referenceToAPost(View view){
+    private void showReferencInput(View view){
         boolean checked = ((CheckBox) view).isChecked();
 
         assert getView()!=null;
@@ -84,9 +143,24 @@ public class CreatePostFragment extends Fragment{
 
         if (checked){
             postReferencia.setVisibility(View.VISIBLE);
-        }
-        else{
+        }else{
             postReferencia.setVisibility(View.GONE);
+        }
+    }
+
+    private void showEventInputs(View view){
+        boolean checked = ((CheckBox) view).isChecked();
+
+        if (checked){
+            eventDateBeg.setVisibility(View.VISIBLE);
+            eventDateEnd.setVisibility(View.VISIBLE);
+            eventTimeBeg.setVisibility(View.VISIBLE);
+            eventTimeEnd.setVisibility(View.VISIBLE);
+        }else{
+            eventDateBeg.setVisibility(View.GONE);
+            eventDateEnd.setVisibility(View.GONE);
+            eventTimeBeg.setVisibility(View.GONE);
+            eventTimeEnd.setVisibility(View.GONE);
         }
     }
 
@@ -99,6 +173,43 @@ public class CreatePostFragment extends Fragment{
             map.put("tags", inputTags.getText().toString());
         map.put("userid", "1");
         map.put("orgid", "1");
+
+        if (cBoxEvent.isChecked()){
+            String sEventDateBeg = eventDateBeg.getText().toString();
+            String sEventTimeBeg = eventTimeBeg.getText().toString();
+            String sEventDateEnd = eventDateEnd.getText().toString();
+            String sEventTimeEnd = eventTimeEnd.getText().toString();
+
+            if (!(sEventDateBeg.equals("") || sEventTimeBeg.equals(""))){
+                try {
+                    SimpleDateFormat formatterApp = new SimpleDateFormat("d/M/yyyy H:m", Locale.getDefault());
+                    SimpleDateFormat formatterBD = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+
+                    Date parsedDateBeg = formatterApp.parse(sEventDateBeg + " " + sEventTimeBeg);
+                    String sEventDateTimeBeg = formatterBD.format(parsedDateBeg);
+
+                    map.put("event_date", sEventDateTimeBeg);
+                    if (!(sEventDateEnd.equals("") || sEventTimeEnd.equals(""))) {
+                        Date parsedDateEnd = formatterApp.parse(sEventDateEnd + " " + sEventTimeEnd);
+
+                        if(parsedDateBeg.before(parsedDateEnd)) {
+                            String sEventDateTimeEnd = formatterBD.format(parsedDateEnd);
+
+                            map.put("event_date_end", sEventDateTimeEnd);
+                        }else{
+                            Toast.makeText(getActivity(),
+                                    "A data de final deve ser após a data de início",
+                                    Toast.LENGTH_SHORT).show();
+                            return;
+                        }
+                    }
+                }catch (ParseException e){
+                    e.printStackTrace();
+                    Toast.makeText(getActivity(), "Um erro ocorreu D=", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+            }
+        }
 
         Log.d("title", inputTitle.getText().toString());
         Log.d("text", inputText.getText().toString());
@@ -148,5 +259,58 @@ public class CreatePostFragment extends Fragment{
                 });
 
         queue.add(jsObjRequest);
+    }
+
+
+    public static class TimePickerFragment extends DialogFragment
+            implements TimePickerDialog.OnTimeSetListener {
+        private TextView pickerOwner;
+
+        public void setPickerOwner(TextView pickerOwner){
+            this.pickerOwner = pickerOwner;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current time as the default values for the picker
+            final Calendar c = Calendar.getInstance();
+            int hour = c.get(Calendar.HOUR_OF_DAY);
+            int minute = c.get(Calendar.MINUTE);
+
+            // Create a new instance of TimePickerDialog and return it
+            return new TimePickerDialog(getActivity(), this, hour, minute,
+                    DateFormat.is24HourFormat(getActivity()));
+        }
+
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+            pickerOwner.setText(new StringBuilder().append(hourOfDay).
+                    append(":").append(minute));
+        }
+    }
+
+    public static class DatePickerFragment extends DialogFragment
+            implements DatePickerDialog.OnDateSetListener {
+        private TextView pickerOwner;
+
+        public void setPickerOwner(TextView pickerOwner){
+            this.pickerOwner = pickerOwner;
+        }
+
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            // Use the current date as the default date in the picker
+            final Calendar c = Calendar.getInstance();
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+
+            // Create a new instance of DatePickerDialog and return it
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            pickerOwner.setText(new StringBuilder().append(day).
+                    append("/").append(month + 1).append("/").append(year));
+        }
     }
 }
