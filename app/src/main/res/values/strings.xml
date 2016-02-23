@@ -42,5 +42,5 @@
     <string name="author_image_description">Imagem do autor</string>
     <string name="feed_label">Feed</string>
     <string name="mandatory_field_missing">Campo Obrigatório em Branco</string>
-    <string name="tags_string">Tags:</string>
+    <string name="tags_string">Tags: </string>
 </resources>

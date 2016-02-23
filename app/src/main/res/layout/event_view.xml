@@ -49,9 +49,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/event_beg"
             android:textSize="13sp"
-            android:padding="5dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginLeft="5dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginLeft="7dp"
             android:layout_below="@+id/post_text_view" />
 
         <TextView
@@ -59,7 +58,6 @@
             android:layout_height="wrap_content"
             android:id="@+id/event_end"
             android:textSize="13sp"
-            android:padding="5dp"
             android:layout_marginStart="7dp"
             android:layout_marginLeft="7dp"
             android:layout_below="@+id/event_beg"

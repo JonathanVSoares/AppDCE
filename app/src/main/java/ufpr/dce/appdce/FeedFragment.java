@@ -183,7 +183,11 @@ public class FeedFragment extends Fragment {
                 if (isEvent){
                     convertView = vi.inflate(R.layout.event_view, parent, false);
                     holder.eventBeg = (TextView) convertView.findViewById(R.id.event_beg);
-                    holder.eventEnd = (TextView) convertView.findViewById(R.id.event_end);
+
+                    if (!post.getEventEnd().equals("null")) {
+                        holder.eventEnd = (TextView) convertView.findViewById(R.id.event_end);
+                        holder.eventEnd.setVisibility(View.VISIBLE);
+                    }
                 }else {
                     convertView = vi.inflate(R.layout.post_view, parent, false);
                 }
@@ -200,15 +204,29 @@ public class FeedFragment extends Fragment {
             }
 
             if (isEvent){
-                holder.eventBeg.setText(post.getEventBeg());
-                holder.eventEnd.setText(post.getEventEnd());
+                if (!post.getEventEnd().equals("null")) {
+                    holder.eventBeg.setText(new StringBuilder().
+                            append("Início do Evento: ").
+                            append(post.getEventBeg()));
+
+                    holder.eventEnd.setText(new StringBuilder().
+                            append("Final do Evento: ").
+                            append(post.getEventEnd()));
+                }else{
+                    holder.eventBeg.setText(new StringBuilder().
+                            append("Data do Evento: ").
+                            append(post.getEventBeg()));
+                }
+
             }
 
             holder.author.setText(post.getAuthor());
             holder.subject.setText(post.getSubject());
             holder.text.setText(post.getText());
             holder.datePosted.setText(post.getPostDate());
-            holder.tags.setText(post.getTags());
+            holder.tags.setText(new StringBuilder().
+                    append(getResources().getString(R.string.tags_string)).
+                    append(post.getTags()));
 
 
             convertView.setId(ViewIdGenerator.generateViewId());
