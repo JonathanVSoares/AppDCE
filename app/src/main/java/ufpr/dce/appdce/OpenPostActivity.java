@@ -73,10 +73,10 @@ public class OpenPostActivity extends AppCompatActivity {
             if(response.get("success").toString().equals("1")){
                 JSONObject postInfo = response.getJSONObject("post");
 
-                boolean isEvent;
+                boolean isEvent = postInfo.has("event_date_beg") && postInfo.has("event_date_beg");
 
                 ViewStub stub = (ViewStub) findViewById(R.id.open_post_view_stub);
-                if (postInfo.has("event_date_beg") && postInfo.has("event_date_beg")) {
+                if (isEvent) {
                     stub.setLayoutResource(R.layout.event_view);
                     isEvent = true;
                 }else{

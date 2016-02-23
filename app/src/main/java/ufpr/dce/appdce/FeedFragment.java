@@ -4,7 +4,6 @@ import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,10 +36,12 @@ public class FeedFragment extends Fragment {
     private PostViewAdapter dataAdapter;
     private Date nextDateToRequest = null;
     private boolean loadingMore = false;
+    private Context context;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        context = getActivity();
         View rootView = inflater.inflate(R.layout.content_feed, container, false);
 
         getActivity().setTitle("Feed");
@@ -48,23 +49,24 @@ public class FeedFragment extends Fragment {
         ListView listView = (ListView) rootView.findViewById(R.id.feed_list_view);
 
         postList = new ArrayList<>();
-        dataAdapter = new PostViewAdapter(getActivity(), R.layout.post_view, postList);
+        dataAdapter = new PostViewAdapter(context, R.layout.post_view, postList);
         listView.setAdapter(dataAdapter);
 
         Date dateNow = new Date();
         requestPosts(10, dateNow);
 
-        listView.setOnScrollListener(new AbsListView.OnScrollListener(){
+        listView.setOnScrollListener(new AbsListView.OnScrollListener() {
 
             @Override
-            public void onScrollStateChanged(AbsListView view, int scrollState) {}
+            public void onScrollStateChanged(AbsListView view, int scrollState) {
+            }
 
             @Override
             public void onScroll(AbsListView view, int firstVisibleItem,
                                  int visibleItemCount, int totalItemCount) {
 
                 int lastInScreen = firstVisibleItem + visibleItemCount;
-                if((lastInScreen == totalItemCount) && !(loadingMore)){
+                if ((lastInScreen == totalItemCount) && !(loadingMore)) {
                     requestPosts(7, nextDateToRequest);
                 }
             }
@@ -78,7 +80,7 @@ public class FeedFragment extends Fragment {
                 Locale.getDefault());
         String strDate = sdfDate.format(dateToRequest);
 
-        RequestQueue queue = Volley.newRequestQueue(getActivity());
+        RequestQueue queue = Volley.newRequestQueue(context);
 
         String url = "http://192.168.0.15/AppDce/get_posts.php?from_date=" +
                 strDate + "&number_of_posts=" + numberOfPosts;
@@ -89,37 +91,39 @@ public class FeedFragment extends Fragment {
                     @Override
                     public void onResponse(JSONObject response) {
                         try {
-                            if(response.get("success").toString().equals("1")){
-                                JSONArray postsInfo = response.getJSONArray("posts");
+                            if(!response.get("success").toString().equals("1")){
+                                return;
+                            }
 
-                                assert getView() != null;
+                            JSONArray postsInfo = response.getJSONArray("posts");
+
+                            assert getView() != null;
 
 
-                                for (int postCounter = 0;
-                                     postCounter < postsInfo.length(); postCounter++){
-                                    JSONObject postInfo = postsInfo.getJSONObject(postCounter);
-                                    Post post = new Post(postInfo);
-                                    postList.add(post);
-                                    dataAdapter.add(post);
-                                }
+                            for (int postCounter = 0;
+                                    postCounter < postsInfo.length();postCounter++){
+                                JSONObject postInfo = postsInfo.getJSONObject(postCounter);
+                                Post post = new Post(postInfo, context);
+                                postList.add(post);
+                                dataAdapter.add(post);
+                            }
 
-                                dataAdapter.notifyDataSetChanged();
-                                loadingMore = false;
+                            dataAdapter.notifyDataSetChanged();
+                            loadingMore = false;
 
-                                JSONObject lastPostInfo = postsInfo.getJSONObject(postsInfo.length() - 1);
-                                String sLastPostDate = lastPostInfo.get("post_date").toString();
+                            JSONObject lastPostInfo = postsInfo.getJSONObject(postsInfo.length() - 1);
+                            String sLastPostDate = lastPostInfo.get("post_date").toString();
 
-                                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+                            SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault());
 
-                                try {
-                                    Date dLastPostDate = formatter.parse(sLastPostDate);
-                                    Calendar cal = Calendar.getInstance();
-                                    cal.setTime(dLastPostDate);
-                                    cal.add(Calendar.SECOND, -1);
-                                    nextDateToRequest = cal.getTime();
-                                }catch (ParseException e){
-                                    e.printStackTrace();
-                                }
+                            try {
+                                Date dLastPostDate = formatter.parse(sLastPostDate);
+                                Calendar cal = Calendar.getInstance();
+                                cal.setTime(dLastPostDate);
+                                cal.add(Calendar.SECOND, -1);
+                                nextDateToRequest = cal.getTime();
+                            }catch (ParseException e){
+                                e.printStackTrace();
                             }
                         }
                         catch (JSONException e){
@@ -130,8 +134,7 @@ public class FeedFragment extends Fragment {
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getActivity(), error.toString(), Toast.LENGTH_SHORT).show();
-                        Log.d("AppDCE", error.toString());
+                        Toast.makeText(context, error.toString(), Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -156,6 +159,8 @@ public class FeedFragment extends Fragment {
             TextView text;
             TextView datePosted;
             TextView tags;
+            TextView eventBeg;
+            TextView eventEnd;
         }
 
         public void add(Post post) {
@@ -163,14 +168,26 @@ public class FeedFragment extends Fragment {
         }
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-
             ViewHolder holder;
-            if (convertView == null) {
+            Post post = this.postList.get(position);
 
+
+
+            boolean isEvent = post.getEventBeg() != null && !post.getEventBeg().isEmpty()
+                    && post.getEventEnd() != null && !post.getEventEnd().isEmpty();
+
+            if (convertView == null) {
                 LayoutInflater vi = LayoutInflater.from(getContext());
-                convertView = vi.inflate(R.layout.post_view, parent, false);
 
                 holder = new ViewHolder();
+                if (isEvent){
+                    convertView = vi.inflate(R.layout.event_view, parent, false);
+                    holder.eventBeg = (TextView) convertView.findViewById(R.id.event_beg);
+                    holder.eventEnd = (TextView) convertView.findViewById(R.id.event_end);
+                }else {
+                    convertView = vi.inflate(R.layout.post_view, parent, false);
+                }
+
                 holder.author = (TextView) convertView.findViewById(R.id.org_author_view);
                 holder.subject = (TextView) convertView.findViewById(R.id.post_subject_view);
                 holder.text = (TextView) convertView.findViewById(R.id.post_text_view);
@@ -182,7 +199,11 @@ public class FeedFragment extends Fragment {
                 holder = (ViewHolder) convertView.getTag();
             }
 
-            Post post = this.postList.get(position);
+            if (isEvent){
+                holder.eventBeg.setText(post.getEventBeg());
+                holder.eventEnd.setText(post.getEventEnd());
+            }
+
             holder.author.setText(post.getAuthor());
             holder.subject.setText(post.getSubject());
             holder.text.setText(post.getText());
@@ -200,7 +221,7 @@ public class FeedFragment extends Fragment {
                 public void onClick(View view) {
                     int viewId = view.getId();
 
-                    Intent intent = OpenPostActivity.newOpenPostActivity(getActivity(), postsIdsMap.get(String.valueOf(viewId)));
+                    Intent intent = OpenPostActivity.newOpenPostActivity(context, postsIdsMap.get(String.valueOf(viewId)));
 
                     startActivity(intent);
                 }
