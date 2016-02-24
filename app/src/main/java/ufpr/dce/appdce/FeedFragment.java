@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -153,6 +154,25 @@ public class FeedFragment extends Fragment {
             this.postList.addAll(postList);
         }
 
+        public int getItemViewType(int position) {
+            Post post = this.postList.get(position);
+            if (post.getEventBeg() != null && !post.getEventBeg().isEmpty()
+                    && post.getEventEnd() != null && !post.getEventEnd().isEmpty()) {
+                return 0;
+            }else{
+                return 1;
+            }
+        }
+
+        public int getViewTypeCount() {
+            return 2;
+        }
+
+        public void add(Post post) {
+            this.postList.add(post);
+        }
+
+
         private class ViewHolder {
             TextView author;
             TextView subject;
@@ -163,47 +183,42 @@ public class FeedFragment extends Fragment {
             TextView eventEnd;
         }
 
-        public void add(Post post) {
-            this.postList.add(post);
-        }
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
             ViewHolder holder;
             Post post = this.postList.get(position);
+            LinearLayout itemLayout = (LinearLayout) convertView;
 
+            int itemType = getItemViewType(position);
 
-
-            boolean isEvent = post.getEventBeg() != null && !post.getEventBeg().isEmpty()
-                    && post.getEventEnd() != null && !post.getEventEnd().isEmpty();
-
-            if (convertView == null) {
+            if (itemLayout == null) {
                 LayoutInflater vi = LayoutInflater.from(getContext());
 
                 holder = new ViewHolder();
-                if (isEvent){
-                    convertView = vi.inflate(R.layout.event_view, parent, false);
-                    holder.eventBeg = (TextView) convertView.findViewById(R.id.event_beg);
+                if (itemType == 0){
+                    itemLayout = (LinearLayout) vi.inflate(R.layout.event_view, parent, false);
+                    holder.eventBeg = (TextView) itemLayout.findViewById(R.id.event_beg);
+                    holder.eventEnd = (TextView) itemLayout.findViewById(R.id.event_end);
 
                     if (!post.getEventEnd().equals("null")) {
-                        holder.eventEnd = (TextView) convertView.findViewById(R.id.event_end);
                         holder.eventEnd.setVisibility(View.VISIBLE);
                     }
                 }else {
-                    convertView = vi.inflate(R.layout.post_view, parent, false);
+                    itemLayout = (LinearLayout) vi.inflate(R.layout.post_view, parent, false);
                 }
 
-                holder.author = (TextView) convertView.findViewById(R.id.org_author_view);
-                holder.subject = (TextView) convertView.findViewById(R.id.post_subject_view);
-                holder.text = (TextView) convertView.findViewById(R.id.post_text_view);
-                holder.datePosted = (TextView) convertView.findViewById(R.id.post_date_posted_view);
-                holder.tags = (TextView) convertView.findViewById(R.id.post_tags_view);
+                holder.author = (TextView) itemLayout.findViewById(R.id.org_author_view);
+                holder.subject = (TextView) itemLayout.findViewById(R.id.post_subject_view);
+                holder.text = (TextView) itemLayout.findViewById(R.id.post_text_view);
+                holder.datePosted = (TextView) itemLayout.findViewById(R.id.post_date_posted_view);
+                holder.tags = (TextView) itemLayout.findViewById(R.id.post_tags_view);
 
-                convertView.setTag(holder);
+                itemLayout.setTag(holder);
             } else {
-                holder = (ViewHolder) convertView.getTag();
+                holder = (ViewHolder) itemLayout.getTag();
             }
 
-            if (isEvent){
+            if (itemType == 0){
                 if (!post.getEventEnd().equals("null")) {
                     holder.eventBeg.setText(new StringBuilder().
                             append("Início do Evento: ").
@@ -217,7 +232,6 @@ public class FeedFragment extends Fragment {
                             append("Data do Evento: ").
                             append(post.getEventBeg()));
                 }
-
             }
 
             holder.author.setText(post.getAuthor());
@@ -229,12 +243,12 @@ public class FeedFragment extends Fragment {
                     append(post.getTags()));
 
 
-            convertView.setId(ViewIdGenerator.generateViewId());
+            itemLayout.setId(ViewIdGenerator.generateViewId());
 
-            postsIdsMap.put(String.valueOf(convertView.getId()), post.getPostId());
+            postsIdsMap.put(String.valueOf(itemLayout.getId()), post.getPostId());
 
             // The user will be directed to the post itself if they click on it on the feed
-            convertView.setOnClickListener(new View.OnClickListener() {
+            itemLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     int viewId = view.getId();
@@ -245,7 +259,7 @@ public class FeedFragment extends Fragment {
                 }
             });
 
-            return convertView;
+            return itemLayout;
         }
     }
 
