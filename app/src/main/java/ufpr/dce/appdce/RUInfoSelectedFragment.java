@@ -2,17 +2,12 @@ package ufpr.dce.appdce;
 
 import android.app.Fragment;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
@@ -43,12 +38,9 @@ public class RUInfoSelectedFragment extends Fragment{
                 break;
             case "Preços":
                 rootView = inflater.inflate(R.layout.ru_prices_fragment, container, false);
+
+                configPricesView();
                 break;
-            case "Identificação":
-                rootView = inflater.inflate(R.layout.ru_identification_fragment, container, false);
-                break;
-            default:
-                return null;
         }
 
         return rootView;
@@ -83,56 +75,49 @@ public class RUInfoSelectedFragment extends Fragment{
                 getStringArray(R.array.botanico_ru_business_hours1)));
 
         TextView ruSource = new TextView(context);
+        ruSource.setAutoLinkMask(Linkify.WEB_URLS);
         ruSource.setText(getString(R.string.ru_source));
 
         TableLayout.LayoutParams sourceParams = new TableLayout.LayoutParams(
                 TableLayout.LayoutParams.WRAP_CONTENT,
                 TableLayout.LayoutParams.WRAP_CONTENT);
+        sourceParams.setMargins(5, 20, 5, 20);
 
         ruSource.setLayoutParams(sourceParams);
         businessHoursView.addView(ruSource);
     }
 
-    private void configGrid(int viewId, int arrayId){
-        GridView grid = (GridView) rootView.findViewById(viewId);
+    private void configPricesView(){
+        LinearLayout pricesView = (LinearLayout) rootView.
+                findViewById(R.id.prices_view);
 
-        String[] items = getResources().
-                getStringArray(arrayId);
-        grid.setAdapter(new BusinessHoursAdapter(items));
-        grid.setBackgroundColor(ContextCompat.getColor(context, R.color.colorGrey3));
-        grid.setHorizontalSpacing(1);
-        grid.setVerticalSpacing(1);
-    }
+        pricesView.addView(new RUPricesView(context, getResources().
+                getStringArray(R.array.breakfast_prices)));
 
-    private class BusinessHoursAdapter extends BaseAdapter{
-        String[] gridItems;
+        pricesView.addView(new RUPricesView(context, getResources().
+                getStringArray(R.array.lunch_dinner_prices)));
 
-        public BusinessHoursAdapter(String[] gridItems){
-            this.gridItems = gridItems;
-        }
+        TextView eventsExplanation = new TextView(context);
+        eventsExplanation.setText(getString(R.string.ru_event_explanation));
 
-        public int getCount() {
-            return gridItems.length;
-        }
+        TableLayout.LayoutParams explanationparams = new TableLayout.LayoutParams(
+                TableLayout.LayoutParams.WRAP_CONTENT,
+                TableLayout.LayoutParams.WRAP_CONTENT);
+        explanationparams.setMargins(5, 20, 5, 20);
 
-        public Object getItem(int position) {
-            return null;
-        }
+        eventsExplanation.setLayoutParams(explanationparams);
+        pricesView.addView(eventsExplanation);
 
-        public long getItemId(int position) {
-            return 0;
-        }
+        TextView ruSource = new TextView(context);
+        ruSource.setAutoLinkMask(Linkify.WEB_URLS);
+        ruSource.setText(getString(R.string.ru_source));
 
-        public View getView(int position,
-                            View convertView, ViewGroup parent) {
-            LinearLayout linearLayout = new LinearLayout(context);
-            linearLayout.setBackgroundColor(Color.WHITE);
+        TableLayout.LayoutParams sourceParams = new TableLayout.LayoutParams(
+                TableLayout.LayoutParams.WRAP_CONTENT,
+                TableLayout.LayoutParams.WRAP_CONTENT);
+        sourceParams.setMargins(5, 20, 5, 20);
 
-            TextView textView = new TextView(context);
-            textView.setText(gridItems[position]);
-
-            linearLayout.addView(textView);
-            return linearLayout;
-        }
+        ruSource.setLayoutParams(sourceParams);
+        pricesView.addView(ruSource);
     }
 }

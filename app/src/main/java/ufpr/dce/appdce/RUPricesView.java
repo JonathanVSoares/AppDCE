@@ -8,13 +8,13 @@ import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-public class RUWorkingHoursView extends LinearLayout{
+public class RUPricesView extends LinearLayout{
 
-    public RUWorkingHoursView(Context context, String[] gridItems){
+    public RUPricesView(Context context, String[] gridItems){
         super(context);
         this.setOrientation(VERTICAL);
 
-        LinearLayout.LayoutParams gridParams = new LinearLayout.LayoutParams(
+        LayoutParams gridParams = new LayoutParams(
                 TableLayout.LayoutParams.MATCH_PARENT,
                 TableLayout.LayoutParams.WRAP_CONTENT);
         gridParams.setMargins(5, 10, 5, 20);
@@ -25,12 +25,12 @@ public class RUWorkingHoursView extends LinearLayout{
         TextView cellText;
         float textViewGravity;
         for (int counter = 0; counter < gridItems.length; counter++){
-            if (counter % 3 == 0){
+            if (counter % 2 == 0){
                 rowLayout = new LinearLayout(context);
                 this.addView(rowLayout);
                 textViewGravity = 2f;
             }else{
-                textViewGravity = 3f;
+                textViewGravity = 9f;
             }
 
             cellText = new TextView(context);
@@ -43,7 +43,7 @@ public class RUWorkingHoursView extends LinearLayout{
 
             TableLayout.LayoutParams textViewParams = new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.WRAP_CONTENT,
-                    TableLayout.LayoutParams.WRAP_CONTENT,
+                    TableLayout.LayoutParams.MATCH_PARENT,
                     textViewGravity);
             textViewParams.setMargins(2, 2, 2, 2);
 

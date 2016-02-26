@@ -9,7 +9,6 @@
     <string-array name="ru_info_list">
         <item>Horário de Funcionamento</item>
         <item>Preços</item>
-        <item>Identificação</item>
     </string-array>
     <string name="action_websearch">Web Search</string>
     <string name="drawer_open">Abre navigation drawer</string>
@@ -50,7 +49,12 @@
     <string name="mandatory_field_missing">Campo Obrigatório em Branco</string>
     <string name="tags_string">Tags: </string>
 
-    <string name="ru_source">Todas as informações dessa seção foram retiradas do "http://www.pra.ufpr.br/portal/ru"</string>
+    <string name="ru_source">Todas as informações dessa seção foram retiradas do
+        "http://www.pra.ufpr.br/portal/ru"</string>
+    <string name="business_hours">Horário de Funcionamento</string>
+    <string name="prices">Preços</string>
+    <string name="ru_event_explanation">(*) Eventos institucionais, de interesse acadêmico da UFPR,
+        planejados com antecedência mínima de 60 (sessenta) dias.</string>
     <string name="central_ru">RU Central</string>
     <string-array name="central_ru_business_hours1">
         <item>Segunda à Sexta</item>
@@ -138,6 +142,36 @@
         <item>Jantar</item>
         <item>17:30</item>
         <item>19:30</item>
+    </string-array>
+
+    <string-array name="breakfast_prices">
+        <item>Café da Manhã</item>
+        <item> </item>
+        <item>Estudantes da UFPR (todas as categorias com registro acadêmico vigente)</item>
+        <item>R$ 0,50</item>
+        <item>Servidores UFPR (técnicos e docentes) e Vinculados</item>
+        <item>R$ 3,50</item>
+        <item>Eventos (*)</item>
+        <item>R$ 3,50</item>
+        <item>Visitantes</item>
+        <item>R$ 5,00</item>
+        <item>Bolsistas PROBEM, AUGM, FUNAI, Residentes (Medicina e Medicina Veterinária)</item>
+        <item>R$ 0,00</item>
+    </string-array>
+
+    <string-array name="lunch_dinner_prices">
+        <item>Almoço e Jantar</item>
+        <item> </item>
+        <item>Estudantes da UFPR (todas as categorias com registro acadêmico vigente)</item>
+        <item>R$ 1,30</item>
+        <item>Servidores UFPR (técnicos e docentes) e Vinculados</item>
+        <item>R$ 6,00</item>
+        <item>Eventos (*)</item>
+        <item>R$ 6,00</item>
+        <item>Visitantes</item>
+        <item>R$ 10,00</item>
+        <item>Bolsistas PROBEM, AUGM, FUNAI, Residentes (Medicina e Medicina Veterinária)</item>
+        <item>R$ 0,00</item>
     </string-array>
 
 </resources>

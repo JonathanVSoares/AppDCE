@@ -9,11 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/ru_info_list">
-
     </ListView>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:autoLink="web"
         android:text="@string/ru_source"/>
 </LinearLayout>

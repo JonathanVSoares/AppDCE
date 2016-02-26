@@ -22,7 +22,7 @@ public class RUInfoFragment extends Fragment{
         ListView infoList = (ListView) rootView.findViewById(R.id.ru_info_list);
 
         infoList.setAdapter(new ArrayAdapter<>(getActivity(),
-                R.layout.drawer_list_item, infoListStrings));
+                R.layout.ru_info_list_layout, infoListStrings));
         infoList.setOnItemClickListener(new InfoListClickListener());
 
         return rootView;
