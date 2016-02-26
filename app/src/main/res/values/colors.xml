@@ -11,4 +11,5 @@
     <color name="colorMediumPurple">#9370DB</color>
     <color name="colorDarkOrchid">#9932CC</color>
     <color name="colorBlackGrey">#444</color>
+    <color name="colorBackground">#EEE</color>
 </resources>

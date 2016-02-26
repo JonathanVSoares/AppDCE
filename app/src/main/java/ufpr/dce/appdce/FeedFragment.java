@@ -50,7 +50,7 @@ public class FeedFragment extends Fragment {
         ListView listView = (ListView) rootView.findViewById(R.id.feed_list_view);
 
         postList = new ArrayList<>();
-        dataAdapter = new PostViewAdapter(context, R.layout.post_view, postList);
+        dataAdapter = new PostViewAdapter(context, 0, postList);
         listView.setAdapter(dataAdapter);
 
         Date dateNow = new Date();

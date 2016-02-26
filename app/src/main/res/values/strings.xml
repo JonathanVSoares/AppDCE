@@ -4,6 +4,12 @@
         <item>Criar Post</item>
         <item>Calendário</item>
         <item>Cardápio RU</item>
+        <item>Info RU</item>
+    </string-array>
+    <string-array name="ru_info_list">
+        <item>Horário de Funcionamento</item>
+        <item>Preços</item>
+        <item>Identificação</item>
     </string-array>
     <string name="action_websearch">Web Search</string>
     <string name="drawer_open">Abre navigation drawer</string>
@@ -43,4 +49,95 @@
     <string name="feed_label">Feed</string>
     <string name="mandatory_field_missing">Campo Obrigatório em Branco</string>
     <string name="tags_string">Tags: </string>
+
+    <string name="ru_source">Todas as informações dessa seção foram retiradas do "http://www.pra.ufpr.br/portal/ru"</string>
+    <string name="central_ru">RU Central</string>
+    <string-array name="central_ru_business_hours1">
+        <item>Segunda à Sexta</item>
+        <item>Abre</item>
+        <item>Fecha</item>
+        <item>Café da Manhã</item>
+        <item>06:45</item>
+        <item>08:00</item>
+        <item>Almoço</item>
+        <item>11:00</item>
+        <item>13:30</item>
+        <item>Jantar</item>
+        <item>17:30</item>
+        <item>19:30</item>
+    </string-array>
+    <string-array name="central_ru_business_hours2">
+        <item>Sábado</item>
+        <item>Abre</item>
+        <item>Fecha</item>
+        <item>Café da Manhã</item>
+        <item>07:30</item>
+        <item>08:30</item>
+        <item>Almoço</item>
+        <item>11:30</item>
+        <item>13:15</item>
+        <item>Jantar</item>
+        <item>17:45</item>
+        <item>19:30</item>
+    </string-array>
+    <string-array name="central_ru_business_hours3">
+        <item>Domingo e Feriado</item>
+        <item>Abre</item>
+        <item>Fecha</item>
+        <item>Café da Manhã</item>
+        <item>08:30</item>
+        <item>09:30</item>
+        <item>Almoço</item>
+        <item>11:30</item>
+        <item>13:00</item>
+        <item>Jantar</item>
+        <item>17:45</item>
+        <item>19:00</item>
+    </string-array>
+
+    <string name="poli_ru">RU Centro Politécnico</string>
+    <string-array name="poli_ru_business_hours1">
+        <item>Segunda à Sexta</item>
+        <item>Abre</item>
+        <item>Fecha</item>
+        <item>Café da Manhã</item>
+        <item>06:45</item>
+        <item>08:00</item>
+        <item>Almoço</item>
+        <item>11:00</item>
+        <item>13:30</item>
+        <item>Jantar</item>
+        <item>17:30</item>
+        <item>19:30</item>
+    </string-array>
+
+    <string name="agrarias_ru">RU Agrárias</string>
+    <string-array name="agrarias_ru_business_hours1">
+        <item>Segunda à Sexta</item>
+        <item>Abre</item>
+        <item>Fecha</item>
+        <item>Café da Manhã</item>
+        <item>06:45</item>
+        <item>08:00</item>
+        <item>Almoço</item>
+        <item>11:30</item>
+        <item>13:00</item>
+    </string-array>
+
+    <string name="botanico_ru">RU Jardim Botânico</string>
+    <string-array name="botanico_ru_business_hours1">
+        <item>Segunda à Sexta</item>
+        <item>Abre</item>
+        <item>Fecha</item>
+        <item>Café da Manhã</item>
+        <item>06:45</item>
+        <item>08:00</item>
+        <item>Almoço</item>
+        <item>11:00</item>
+        <item>13:30</item>
+        <item>Jantar</item>
+        <item>17:30</item>
+        <item>19:30</item>
+    </string-array>
+
 </resources>
