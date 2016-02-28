@@ -5,9 +5,9 @@ import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-public class BusinessHoursTitleView extends TextView {
+public class RUBusinessHoursTitleView extends TextView {
 
-    public BusinessHoursTitleView (Context context, String viewText){
+    public RUBusinessHoursTitleView(Context context, String viewText){
         super(context);
 
         TableLayout.LayoutParams textViewParams = new TableLayout.LayoutParams(

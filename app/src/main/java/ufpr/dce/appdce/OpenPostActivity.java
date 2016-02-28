@@ -122,7 +122,7 @@ public class OpenPostActivity extends AppCompatActivity {
                         append(getResources().getString(R.string.tags_string)).
                         append(postInfo.getString("tags")));
             }
-            // add else
+            //ToDo:add else
         }
         catch (JSONException e){
             e.printStackTrace();

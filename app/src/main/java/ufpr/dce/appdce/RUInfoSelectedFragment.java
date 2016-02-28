@@ -50,7 +50,7 @@ public class RUInfoSelectedFragment extends Fragment{
         LinearLayout businessHoursView = (LinearLayout) rootView.
                 findViewById(R.id.business_hours_view);
 
-        businessHoursView.addView(new BusinessHoursTitleView(context, getResources().
+        businessHoursView.addView(new RUBusinessHoursTitleView(context, getResources().
                 getString(R.string.central_ru)));
         businessHoursView.addView(new RUWorkingHoursView(context, getResources().
                 getStringArray(R.array.central_ru_business_hours1)));
@@ -59,17 +59,17 @@ public class RUInfoSelectedFragment extends Fragment{
         businessHoursView.addView(new RUWorkingHoursView(context, getResources().
                 getStringArray(R.array.central_ru_business_hours3)));
 
-        businessHoursView.addView(new BusinessHoursTitleView(context, getResources().
+        businessHoursView.addView(new RUBusinessHoursTitleView(context, getResources().
                 getString(R.string.poli_ru)));
         businessHoursView.addView(new RUWorkingHoursView(context, getResources().
                 getStringArray(R.array.poli_ru_business_hours1)));
 
-        businessHoursView.addView(new BusinessHoursTitleView(context, getResources().
+        businessHoursView.addView(new RUBusinessHoursTitleView(context, getResources().
                 getString(R.string.agrarias_ru)));
         businessHoursView.addView(new RUWorkingHoursView(context, getResources().
                 getStringArray(R.array.agrarias_ru_business_hours1)));
 
-        businessHoursView.addView(new BusinessHoursTitleView(context, getResources().
+        businessHoursView.addView(new RUBusinessHoursTitleView(context, getResources().
                 getString(R.string.botanico_ru)));
         businessHoursView.addView(new RUWorkingHoursView(context, getResources().
                 getStringArray(R.array.botanico_ru_business_hours1)));

@@ -43,7 +43,7 @@ public class RUWorkingHoursView extends LinearLayout{
 
             TableLayout.LayoutParams textViewParams = new TableLayout.LayoutParams(
                     TableLayout.LayoutParams.WRAP_CONTENT,
-                    TableLayout.LayoutParams.WRAP_CONTENT,
+                    TableLayout.LayoutParams.MATCH_PARENT,
                     textViewGravity);
             textViewParams.setMargins(2, 2, 2, 2);
 

@@ -129,7 +129,7 @@ public class MainActivity extends AppCompatActivity{
                 fragment = new CalendarFragment();
                 break;
             case "Cardápio RU":
-                fragment = new RUMenuView();
+                fragment = new RUMenuFragment();
                 break;
             case "Info RU":
                 fragment = new RUInfoFragment();
