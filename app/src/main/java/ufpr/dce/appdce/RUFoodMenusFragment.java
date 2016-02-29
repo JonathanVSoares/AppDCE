@@ -23,7 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
 
-public class RUMenuFragment extends Fragment{
+public class RUFoodMenusFragment extends Fragment{
     private Context context;
     private String[] weekDays;
     private LinearLayout menuView;
@@ -56,7 +56,7 @@ public class RUMenuFragment extends Fragment{
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
-        String url = "http://192.168.0.15/AppDce/get_ru_menus.php?from_date=" +
+        String url = Util.SERVER_IP + "get_ru_menus.php?from_date=" +
                 firstDayOfWeek + "&to_date=" + lastDayOfWeek;
 
         CustomRequest jsObjRequest = new CustomRequest

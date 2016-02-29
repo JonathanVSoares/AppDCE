@@ -35,15 +35,6 @@
         <item>Almoço</item>
         <item>Jantar</item>
     </string-array>
-    <string name="week_day_name1">Domingo</string>
-    <string name="week_day_name2">Segunda-Feira</string>
-    <string name="week_day_name3">Terça-Feira</string>
-    <string name="week_day_name4">Quarta-Feira</string>
-    <string name="week_day_name5">Quinta-Feira</string>
-    <string name="week_day_name6">Sexta-Feira</string>
-    <string name="week_day_name7">Sábado</string>
-    <string name="create_post">Criar Post</string>
-    <string name="novo_post">Novo Post</string>
     <string name="title">Título</string>
     <string name="conteudo">Conteúdo</string>
     <string name="tags">Tags</string>

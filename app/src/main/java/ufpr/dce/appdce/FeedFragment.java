@@ -83,7 +83,7 @@ public class FeedFragment extends Fragment {
 
         RequestQueue queue = Volley.newRequestQueue(context);
 
-        String url = "http://192.168.0.15/AppDce/get_posts.php?from_date=" +
+        String url = Util.SERVER_IP + "get_posts.php?from_date=" +
                 strDate + "&number_of_posts=" + numberOfPosts;
 
         CustomRequest jsObjRequest = new CustomRequest

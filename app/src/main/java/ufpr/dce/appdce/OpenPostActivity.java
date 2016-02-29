@@ -47,7 +47,7 @@ public class OpenPostActivity extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(getBaseContext());
 
-        String url = "http://192.168.0.15/AppDce/get_post_details.php?post_id=" + postId;
+        String url = Util.SERVER_IP + "get_post_details.php?post_id=" + postId;
 
         CustomRequest jsObjRequest = new CustomRequest
                 (url, null, new Response.Listener<JSONObject>() {

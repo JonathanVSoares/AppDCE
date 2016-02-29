@@ -122,8 +122,14 @@ public class CreatePostFragment extends Fragment{
         btnCreateProduct.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                boolean eventFieldsEmpty = cBoxEvent.getVisibility() == View.VISIBLE &&
+                        ((eventDateBeg.getText().toString().equals("")) || (eventTimeBeg.getText().toString().equals("")) ||
+                                (!eventDateEnd.getText().toString().equals("") && eventTimeEnd.getText().toString().equals("")) ||
+                                (eventDateEnd.getText().toString().equals("") && !eventTimeEnd.getText().toString().equals(""))
+                        );
                 if (!inputTitle.getText().toString().equals("") &&
-                        !inputText.getText().toString().equals("")){
+                        !inputText.getText().toString().equals("") &&
+                        !eventFieldsEmpty){
                     createPost();
                 }else{
                     Toast.makeText(getActivity(),
@@ -217,7 +223,7 @@ public class CreatePostFragment extends Fragment{
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
-        String url = "http://192.168.0.15/AppDce/create_post.php";
+        String url = Util.SERVER_IP + "create_post.php";
 
         pDialog = new ProgressDialog(getActivity());
         pDialog.setMessage("Creating Post..");
